@@ -1,48 +1,80 @@
 var storage = require('node-persist');
-storage.initSync();
+var crypto = require('crypto-js');
+var _ = require('underscore');
 var commands = require(__dirname + '/commands.js');
+var argv = commands.argv;
 
+storage.initSync();
 console.log('Starting password manager');
 
-function createAccount (account) {
-    var accounts = storage.getItemSync('accounts');
 
-    if (typeof (accounts) === 'undefined') {
-        accounts = [];
+if (commands.command === 'create') {
+    try {
+        var account = {
+            name: argv.name,
+            username: argv.username,
+            password: argv.password
+        };
+        var createdAccount = createAccount(account, argv.masterPassword);
+        printResults(createdAccount, 'Created');
+    } catch (e) {
+        console.log('Unable to create account: ' + e);
     }
 
-    accounts.push(account);
-    storage.setItemSync('accounts', accounts);
 
+} else if (commands.command === 'get') {
+    try {
+        var retrievedAccount = getAccount(argv.name, argv.masterPassword);
+
+        if (typeof retrievedAccount === 'undefined') {
+            console.log('Account not found with that name');
+        } else {
+            printResults(retrievedAccount, 'Retrieved');
+        }
+    } catch (e) {
+        console.log('Unable to retrieve account: \n' + e);
+    }
+}
+
+
+function getAccounts (masterPassword) {
+    var cipherText = storage.getItemSync('accounts');
+    var accounts = [];
+
+    if (typeof cipherText !== 'undefined') {
+        var bytes = crypto.AES.decrypt(cipherText, masterPassword);
+        accounts = JSON.parse(bytes.toString(crypto.enc.Utf8));
+    }
+    return accounts;
+}
+
+
+function saveAccounts (accounts, masterPassword) {
+    var cipherText = crypto.AES
+        .encrypt(JSON.stringify(accounts), masterPassword);
+    storage.setItemSync('accounts', cipherText.toString());
+    return accounts;
+}
+
+
+function createAccount (account, masterPassword) {
+    var accounts = getAccounts(masterPassword);
+
+    accounts.push(account);
+    saveAccounts(accounts, masterPassword);
     return account;
 }
 
-function getAccount (accountName) {
-    var accounts = storage.getItemSync('accounts');
-    var matchedAccount;
 
-    accounts.forEach(function (account) {
-        if (account.name === accountName) {
-            matchedAccount = account;
-        }
-    });
-
-    return matchedAccount;
+function getAccount (accountName, masterPassword) {
+    var accounts = getAccounts(masterPassword);
+    return _.findWhere(accounts, {name: accountName});
 }
 
-if (commands.command === 'create') {
-    var createdAccount = createAccount({
-        name: commands.argv.name,
-        username: commands.argv.username,
-        password: commands.argv.password
-    });
-    console.log('Created account: \n' + JSON.stringify(createdAccount));
-} else if (commands.command === 'get') {
-    var retrievedAccount = getAccount(commands.argv.name);
 
-    if (typeof retrievedAccount === 'undefined') {
-        console.log('Account not found with that name');
-    } else {
-        console.log('Account found: \n' + JSON.stringify(retrievedAccount));
-    }
+function printResults (account, action) {
+    console.log('\n-----------------\n' + action +' account\n-----------------' +
+        '\nAccount name: ' + account.name +
+        '\nUser name   : ' + account.username +
+        '\nPassword    : ' + account.password);
 }

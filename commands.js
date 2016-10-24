@@ -18,6 +18,12 @@ var argv = require('yargs')
                 alias: 'p',
                 description: 'Password that is used for the given account and username',
                 type: 'string'
+            },
+            masterPassword: {
+                demand: true,
+                alias: 'm',
+                description: 'Master password user to create accounts for user',
+                type: 'string'
             }
         });
     })
@@ -27,6 +33,12 @@ var argv = require('yargs')
                 demand: true,
                 alias: 'n',
                 description: 'Name of account to retrieve',
+                type: 'string'
+            },
+            masterPassword: {
+                demand: true,
+                alias: 'm',
+                description: 'Master password user to create accounts for user',
                 type: 'string'
             }
         });

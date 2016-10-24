@@ -20,12 +20,12 @@ console.log('Encrypted: ' + ciphertxt);
     we first store the bytes, and then encode as UTF-8.
  */
 var encoding = crypto.enc.Utf8;
-var bytes = crypto.AES.decrypt(ciphertxt, key);
-var decrypted = bytes.toString(encoding);
+var bytes = crypto.AES.decrypt(ciphertxt, key).toString(encoding);
+//var decrypted = bytes.toString(encoding);
 
 /*
     Data was originally stored as JSON, be sure to
     convert it back to JSON for application use.
  */
-var decryptedObj = JSON.parse(decrypted);
+var decryptedObj = JSON.parse(bytes);
 console.log('\nDecrypted: ' + JSON.stringify(decryptedObj));
