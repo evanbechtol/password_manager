@@ -53,10 +53,10 @@ var ciphers = {
     },
     rc4Drop: {
         encrypt: function () {
-            return crypto.RC4Drop.encrypt(JSON.stringify(accounts), masterPassword);
+            return crypto.RC4Drop.encrypt(JSON.stringify(accounts), masterPassword, { drop: 3072/4 });
         },
         decrypt: function () {
-            var bytes = crypto.RC4Drop.decrypt(cipherText, masterPassword);
+            var bytes = crypto.RC4Drop.decrypt(cipherText, masterPassword, { drop: 3072/4 });
             return JSON.parse(bytes.toString(crypto.enc.Utf8));
         }
     },
