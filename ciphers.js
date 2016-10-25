@@ -16,8 +16,8 @@ var crypto = require('crypto-js');
 
 var ciphers = {
     aes: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.AES.encrypt(JSON.stringify(accounts), masterPassword);
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.AES.encrypt(JSON.stringify(plaintext), masterPassword);
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.AES.decrypt(cipherText, masterPassword);
@@ -25,8 +25,8 @@ var ciphers = {
         }
     },
     des: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.DES.encrypt(JSON.stringify(accounts), masterPassword);
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.DES.encrypt(JSON.stringify(plaintext), masterPassword);
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.DES.decrypt(cipherText, masterPassword);
@@ -34,17 +34,17 @@ var ciphers = {
         }
     },
     tripledes: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.TripleDES.encrypt(JSON.stringify(accounts), masterPassword);
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.TripleDES.encrypt(JSON.stringify(plaintext), masterPassword);
         },
-        decrypt: function (cipherText, masterPassword) {
-            var bytes = crypto.TripleDES.decrypt(cipherText, masterPassword);
+        decrypt: function (plaintext, masterPassword) {
+            var bytes = crypto.TripleDES.decrypt(plaintext, masterPassword);
             return JSON.parse(bytes.toString(crypto.enc.Utf8));
         }
     },
     rabbit: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.Rabbit.encrypt(JSON.stringify(accounts), masterPassword);
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.Rabbit.encrypt(JSON.stringify(plaintext), masterPassword);
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.Rabbit.decrypt(cipherText, masterPassword);
@@ -52,8 +52,8 @@ var ciphers = {
         }
     },
     rc4: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.RC4.encrypt(JSON.stringify(accounts), masterPassword);
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.RC4.encrypt(JSON.stringify(plaintext), masterPassword);
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.RC4.decrypt(cipherText, masterPassword);
@@ -61,8 +61,8 @@ var ciphers = {
         }
     },
     rc4Drop: {
-        encrypt: function (accounts, masterPassword) {
-            return crypto.RC4Drop.encrypt(JSON.stringify(accounts), masterPassword, { drop: 3072/4 });
+        encrypt: function (plaintext, masterPassword) {
+            return crypto.RC4Drop.encrypt(JSON.stringify(plaintext), masterPassword, { drop: 3072/4 });
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.RC4Drop.decrypt(cipherText, masterPassword, { drop: 3072/4 });
