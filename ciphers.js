@@ -1,6 +1,15 @@
 /*
     This file contains all of the methods required for encryption
     or decryption using cipher algorithms.
+
+    Available cipher algorithms include both an encrypt and decrypt
+    method.
+        -AES
+        -DES
+        -TripleDES
+        -Rabbit
+        -RC4
+        -RC4Drop
  */
 
 var crypto = require('crypto-js');
