@@ -34,28 +34,28 @@ var ciphers = {
         }
     },
     rabbit: {
-        encrypt: function () {
+        encrypt: function (accounts, masterPassword) {
             return crypto.Rabbit.encrypt(JSON.stringify(accounts), masterPassword);
         },
-        decrypt: function () {
+        decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.Rabbit.decrypt(cipherText, masterPassword);
             return JSON.parse(bytes.toString(crypto.enc.Utf8));
         }
     },
     rc4: {
-        encrypt: function () {
+        encrypt: function (accounts, masterPassword) {
             return crypto.RC4.encrypt(JSON.stringify(accounts), masterPassword);
         },
-        decrypt: function () {
+        decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.RC4.decrypt(cipherText, masterPassword);
             return JSON.parse(bytes.toString(crypto.enc.Utf8));
         }
     },
     rc4Drop: {
-        encrypt: function () {
+        encrypt: function (accounts, masterPassword) {
             return crypto.RC4Drop.encrypt(JSON.stringify(accounts), masterPassword, { drop: 3072/4 });
         },
-        decrypt: function () {
+        decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.RC4Drop.decrypt(cipherText, masterPassword, { drop: 3072/4 });
             return JSON.parse(bytes.toString(crypto.enc.Utf8));
         }
