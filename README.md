@@ -10,6 +10,7 @@
    <h3>Steps to run:</h3>
        <div>
          <ol>
+            <li>Special Note: <em>The file can only have 1 encryption type at a time. In other words, you cannot create an account using AES, and then create another account using DES in the same file. If you wish to use a new cipher algorithm, then you must create a new file.</em></li>
             <li>Run <code>npm install</code>  to download and install all dependencies</li>
             <li>Run program with: <code>node app.js <command> -n [account name] -u [account user name] -p [account password] -m [encryption key] -c [cipher method]</code></li>
             <li>Exit the program by hitting <code>ctrl + c</code> in terminal</li>

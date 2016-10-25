@@ -12,6 +12,9 @@
         AES encryption. The accounts can be retrieved by using the get command with the master password that was used
         when the account was created. If the master password does not match, the account cannot be decrypted for viewing.
 
+    Special Note: The file can only have 1 encryption type at a time. In other words, you cannot create an account using AES,
+        and then create  another account using DES. If you wish to use a new cipher algorithm, then you must create a new file.
+
     Cipher methods available:
         - AES
         - DES
