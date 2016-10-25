@@ -76,6 +76,21 @@ if (commands.command === 'create') {
 }
 
 
+function getAccount (accountName, masterPassword) {
+    var accounts = getAccounts(masterPassword);
+    return _.findWhere(accounts, {name: accountName});
+}
+
+
+function createAccount (account, masterPassword) {
+    var accounts = getAccounts(masterPassword);
+
+    accounts.push(account);
+    saveAccounts(accounts, masterPassword);
+    return account;
+}
+
+
 function getAccounts (masterPassword) {
     var cipherText = storage.getItemSync('accounts');
     var accounts = [];
@@ -91,21 +106,6 @@ function saveAccounts (accounts, masterPassword) {
     var cipherText = ciphers.cipher(argv.cipher, 'encrypt', accounts, masterPassword);
     storage.setItemSync('accounts', cipherText.toString());
     return accounts;
-}
-
-
-function createAccount (account, masterPassword) {
-    var accounts = getAccounts(masterPassword);
-
-    accounts.push(account);
-    saveAccounts(accounts, masterPassword);
-    return account;
-}
-
-
-function getAccount (accountName, masterPassword) {
-    var accounts = getAccounts(masterPassword);
-    return _.findWhere(accounts, {name: accountName});
 }
 
 
