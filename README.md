@@ -11,7 +11,7 @@
        <div>
          <ol>
             <li>Run <code>npm install</code>  to download and install all dependencies</li>
-            <li>Run the program with: <code>node app.js <command> -n [account name] -u [account user name] -p [account password] -m [encryption key]</code></li>
+            <li>Run program with: <code>node app.js <command> -n [account name] -u [account user name] -p [account password] -m [encryption key] -c [cipher method]</code></li>
             <li>Exit the program by hitting <code>ctrl + c</code> in terminal</li>
          </ol>
       </div>
@@ -20,6 +20,16 @@
         AES encryption. The accounts can be retrieved by using the get command with the master password that was used
         when the account was created. If the master password does not match, the account cannot be decrypted for viewing.</p>
      
+   <h3>Supported Cipher Algorithms:</h3>
+   <ul>
+      <li>AES</li>
+      <li>DES</li>
+      <li>TripleDES</li>
+      <li>Rabbit</li>
+      <li>RC4</li>
+      <li>RC4Drop</li>
+   </ul>
+   <p><em><strong>The same cipher algorithm must be used for both encryption and decryption. Data cannot be unencrypted without matching algorithm.</strong></em></p>
    <h3>Commands:</h3>
       <ul>
          <li><h4>create:</h4> Facilitates account creation and storage. Must include the following arguments:
@@ -28,15 +38,17 @@
                <li>--username or -u</li>
                <li>--password or -p</li>
                <li>--masterPassword or -m</li>
+               <li>--cipher or -c</li>
             </ul>
-            <p><code>usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123</code></p></li>
+            <p><code>usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes</code></p></li>
             
        <li><h4>get   :</h4> Retrieves account by the account name. Must include the following arguments:
          <ul>
-            <li>--name or -n</li>
-            <li>--masterPassword or -m</li>
+            <li>--name or -n <p><em>Account name must exactly match how it was entered when encrypted (case-sensitive)</em></p></li>
+            <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p></li>
+            <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p></li>
          </ul>
-            <p><code>usage example: node app.js get -n Facebook  -m secret123</code></p></li>
+            <p><code>usage example: node app.js get -n Facebook  -m secret123 -c aes</code></p></li>
       </ul>
        
 </div>
