@@ -5,6 +5,13 @@
       
 </div>
 <div>
+   <h3>Contributing</h3><p>If you would like to add-on to this, feel free to fork!</p>
+   <h3>Future functionality:</h3>
+   <ul>
+      <li>Hashing algorithms</li>
+      <li>GUI</li>
+      <li>Multiple input per run</li>
+   </ul>
    <h3>Requirements:</h3><p>Requires node.js to run, along with all dependencies that can be installed through the NPM CLI.</p>
    <h3>More info on libraries used</h3><p>https://www.npmjs.com/package/crypto-js<br/>https://code.google.com/archive/p/crypto-js/<br/>https://www.npmjs.com/package/node-persist</p>
    <h3>Steps to run:</h3>
