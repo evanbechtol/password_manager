@@ -1,12 +1,12 @@
 {
   "name": "password_manager",
   "version": "1.0.0",
-  "description": "",
+  "description": "Password management program utilizing modern encryption approaches",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Evan Bechtol evanbechtol@gmail.com",
   "license": "ISC",
   "dependencies": {
     "crypto-js": "^3.1.7",
