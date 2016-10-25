@@ -6,6 +6,7 @@
 </div>
 <div>
    <h3>Requirements:</h3><p>Requires node.js to run, along with all dependencies that can be installed through the NPM CLI.</p>
+   <h3>More info on crypto-js library</h3><p>https://www.npmjs.com/package/crypto-js</p>
    <h3>Steps to run:</h3>
        <div>
          <ol>
