@@ -1,7 +1,7 @@
 <div>
    <p><strong>Title:</strong> Password Manager program</br>
    <strong>Author:</strong> Evan Bechtol (ecb120030@utdallas.edu)</br>
-   <strong>Last revision date:</strong> 10/24/2016</p></br>
+   <strong>Last revision date:</strong> 10/25/2016</p></br>
       
 </div>
 <div>

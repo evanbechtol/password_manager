@@ -1,7 +1,7 @@
 /*
     Title: Password Manager program
     Author: Evan Bechtol (ecb120030@utdallas.edu)
-    Last revision date: 10/24/2016
+    Last revision date: 10/25/2016
 
     Steps to run:
         1) run 'npm install'  to download and install all dependencies
