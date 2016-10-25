@@ -41,8 +41,8 @@
  */
 
 var storage = require('node-persist');
-var ciphers = require(__dirname + '/ciphers.js');
-var commands = require(__dirname + '/commands.js');
+var ciphers = require(__dirname + '/util/ciphers.js');
+var commands = require(__dirname + '/util/commands.js');
 var _ = require('underscore');
 var argv = commands.argv;
 

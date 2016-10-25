@@ -8,7 +8,7 @@ var data = {
 var key = '123abc';
 
 /*
-    Data is an object. we must convert it to a string
+    data is an object. we must convert it to a string
     before we can generate the ciphertext.
  */
 var plaintxt = JSON.stringify(data);
@@ -24,7 +24,7 @@ var bytes = crypto.AES.decrypt(ciphertxt, key).toString(encoding);
 //var decrypted = bytes.toString(encoding);
 
 /*
-    Data was originally stored as JSON, be sure to
+    data was originally stored as JSON, be sure to
     convert it back to JSON for application use.
  */
 var decryptedObj = JSON.parse(bytes);
