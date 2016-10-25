@@ -5,12 +5,20 @@
 
     Steps to run:
         1) run 'npm install'  to download and install all dependencies
-        2) run the program with: node app.js <command> -n <account name> -u <account user name> -p <account password> -m <encryption key>
+        2) run the program with: node app.js <command> -n <account name> -u <account user name> -p <account password> -m <encryption key> -c <cipher method>
         3) exit the program by hitting ctrl + c in terminal
 
     Description: This program will store encrypted accounts with their related username and password pairing, with
         AES encryption. The accounts can be retrieved by using the get command with the master password that was used
         when the account was created. If the master password does not match, the account cannot be decrypted for viewing.
+
+    Cipher methods available:
+        - AES
+        - DES
+        - TripleDES
+        - Rabbit
+        - RC4
+        - RC4Drop
 
     Commands:
         create: Facilitates account creation and storage. Must include the following arguments:
@@ -18,20 +26,21 @@
             --username or -u
             --password or -p
             --masterPassword or -m
+            --cipher or -c
 
-            usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123
+            usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes
 
         get   : Retrieves account by the account name. Must include the following arguments:
             --name or -n
             --masterPassword or -m
-
-            usage example: node app.js get -n Facebook  -m secret123
+            --cipher or -c
+            usage example: node app.js get -n Facebook  -m secret123 -c aes
  */
 
 var storage = require('node-persist');
-var crypto = require('crypto-js');
-var _ = require('underscore');
+var ciphers = require(__dirname + '/ciphers.js');
 var commands = require(__dirname + '/commands.js');
+var _ = require('underscore');
 var argv = commands.argv;
 
 storage.initSync();
@@ -72,16 +81,14 @@ function getAccounts (masterPassword) {
     var accounts = [];
 
     if (typeof cipherText !== 'undefined') {
-        var bytes = crypto.AES.decrypt(cipherText, masterPassword);
-        accounts = JSON.parse(bytes.toString(crypto.enc.Utf8));
+       accounts = ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword);
     }
     return accounts;
 }
 
 
 function saveAccounts (accounts, masterPassword) {
-    var cipherText = crypto.AES
-        .encrypt(JSON.stringify(accounts), masterPassword);
+    var cipherText = ciphers.cipher(argv.cipher, 'encrypt', accounts, masterPassword);
     storage.setItemSync('accounts', cipherText.toString());
     return accounts;
 }

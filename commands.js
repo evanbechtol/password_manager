@@ -24,6 +24,12 @@ var argv = require('yargs')
                 alias: 'm',
                 description: 'Master password user to create accounts for user',
                 type: 'string'
+            },
+            cipher: {
+                demand: true,
+                alias: 'c',
+                description: 'Cipher method for encryption: AES, DES, TripleDES, Rabbit, RC4, RC4Drop. The cipher method chosen will be used for decryption.',
+                type: 'string'
             }
         });
     })
@@ -39,6 +45,12 @@ var argv = require('yargs')
                 demand: true,
                 alias: 'm',
                 description: 'Master password user to create accounts for user',
+                type: 'string'
+            },
+            cipher: {
+                demand: true,
+                alias: 'c',
+                description: 'Cipher method for encryption: AES, DES, TripleDES, Rabbit, RC4, RC4Drop. Cipher type must match the type that was used for encryption',
                 type: 'string'
             }
         });
