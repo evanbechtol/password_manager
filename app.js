@@ -80,8 +80,7 @@ if (commands.command === 'create') {
 
 
 function getAccount (accountName, masterPassword) {
-    var accounts = getAccounts(masterPassword);
-    return _.findWhere(accounts, {name: accountName});
+    return _.findWhere(getAccounts(masterPassword), {name: accountName});
 }
 
 
