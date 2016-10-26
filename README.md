@@ -1,7 +1,7 @@
 <div>
    <p><strong>Title:</strong> Password Manager program</br>
    <strong>Author:</strong> Evan Bechtol (ecb120030@utdallas.edu)</br>
-   <strong>Last revision date:</strong> 10/25/2016</p></br>
+   <strong>Last revision date:</strong> 10/26/2016</p></br>
       
 </div>
 <div>
@@ -50,13 +50,23 @@
             </ul>
             <p><code>usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes</code></p></li>
             
-       <li><h4>get   :</h4> Retrieves account by the account name. Must include the following arguments:
+       <li><h4>get:</h4> Retrieves account by the account name. Must include the following arguments:
          <ul>
             <li>--name or -n <p><em>Account name must exactly match how it was entered when encrypted (case-sensitive)</em></p></li>
             <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p></li>
             <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p></li>
          </ul>
-            <p><code>usage example: node app.js get -n Facebook  -m secret123 -c aes</code></p></li>
+            <p><code>usage example: node app.js get -n Facebook  -m secret123 -c aes</code></p>
+       </li>
+       
+       <li><h4>delete:</h4> Deletes account by the account name. Must include the following arguments:
+                <ul>
+                   <li>--name or -n <p><em>Account name must exactly match how it was entered when encrypted (case-sensitive)</em></p></li>
+                   <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p></li>
+                   <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p></li>
+                </ul>
+                   <p><code>usage example: node app.js delete -n Facebook  -m secret123 -c aes</code></p>
+              </li>
       </ul>
        
 </div>

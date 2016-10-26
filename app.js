@@ -38,6 +38,12 @@
             --masterPassword or -m
             --cipher or -c
             usage example: node app.js get -n Facebook  -m secret123 -c aes
+
+        deletes : Deletes account by the account name. Must include the following arguments:
+             --name or -n
+             --masterPassword or -m
+             --cipher or -c
+             usage example: node app.js delete -n Facebook  -m secret123 -c aes
  */
 
 var storage = require('node-persist');
