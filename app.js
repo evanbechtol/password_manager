@@ -48,33 +48,59 @@ var argv = commands.argv;
 
 storage.initSync();
 console.log('Starting password manager');
+main();
 
 
-if (commands.command === 'create') {
-    try {
-        var account = {
-            name: argv.name,
-            username: argv.username,
-            password: argv.password
-        };
-        var createdAccount = createAccount(account, argv.masterPassword);
-        printResults(createdAccount, 'Created');
-    } catch (e) {
-        console.log('Unable to create account: ' + e);
-    }
-
-
-} else if (commands.command === 'get') {
-    try {
-        var retrievedAccount = getAccount(argv.name, argv.masterPassword);
-        if (_.size(retrievedAccount) === 0) {
-            console.log('Account not found with that name');
-        } else {
-            printResults(retrievedAccount, 'Retrieved');
+function main () {
+    if (commands.command === 'create') {
+        try {
+            var account = {
+                name: argv.name,
+                username: argv.username,
+                password: argv.password
+            };
+            var createdAccount = createAccount(account, argv.masterPassword);
+            printResults(createdAccount, 'Created');
+        } catch (e) {
+            console.log('Unable to create account: ' + e);
         }
-    } catch (e) {
-        console.log('Unable to retrieve account: \n' + e);
+
+
+    } else if (commands.command === 'get') {
+        try {
+            var retrievedAccount = getAccount(argv.name, argv.masterPassword);
+            if (_.size(retrievedAccount) === 0) {
+                console.log('Account not found with that name');
+            } else {
+                printResults(retrievedAccount, 'Retrieved');
+            }
+        } catch (e) {
+            console.log('Unable to retrieve account: \n' + e);
+        }
+    } else if (commands.command === 'delete') {
+        try {
+            var accounts = getAccount(argv.name, argv.masterPassword);
+            if (_.size(accounts) === 0) {
+                console.log('Account not found with that name');
+            } else {
+                deleteAccount(argv.name, argv.masterPassword);
+            }
+        } catch (e) {
+
+        }
     }
+}
+
+
+function deleteAccount (accountName, masterPassword) {
+    var accounts = getAccounts(masterPassword);
+    accounts.forEach(function (account) {
+        if (account.name.toLowerCase() === accountName.toLowerCase()) {
+            accounts.splice(accounts.indexOf(account), 1);
+            saveAccounts(accounts, masterPassword);
+            printResults(account, 'Deleted');
+        }
+    });
 }
 
 
@@ -117,11 +143,9 @@ function saveAccounts (accounts, masterPassword) {
 }
 
 
-function printResults (accounts, action) {
-    console.log('\n-----------------\n' + action +' account\n-----------------');
-        accounts.forEach(function (account) {
-            console.log('Account name: ' + account.name +
-                '\nUser name   : ' + account.username +
-                '\nPassword    : ' + account.password);
-        });
+function printResults (account, action) {
+    console.log('\n-----------------\n' + action +' account\n-----------------' +
+        '\nAccount name: ' + account.name +
+        '\nUser name   : ' + account.username +
+        '\nPassword    : ' + account.password);
 }
