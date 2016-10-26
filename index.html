@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Password manager : Nodejs password management application">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Password manager</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Parasin/password_manager">View on GitHub</a>
+
+          <h1 id="project_title">Password manager</h1>
+          <h2 id="project_tagline">Nodejs password management application</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Parasin/password_manager/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Parasin/password_manager/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <div>
+   <h3>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h3>
+<p>If you would like to add-on to this, feel free to fork!</p>
+   <h3>
+<a id="future-functionality" class="anchor" href="#future-functionality" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Future functionality:</h3>
+   <ul>
+      <li>Hashing algorithms</li>
+      <li>GUI</li>
+      <li>Multiple input per run</li>
+   </ul>
+   <h3>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements:</h3>
+<p>Requires node.js to run, along with all dependencies that can be installed through the NPM CLI.</p>
+   <h3>
+<a id="more-info-on-libraries-used" class="anchor" href="#more-info-on-libraries-used" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More info on libraries used</h3>
+<p>https://www.npmjs.com/package/crypto-js<br>https://code.google.com/archive/p/crypto-js/<br>https://www.npmjs.com/package/node-persist</p>
+   <h3>
+<a id="steps-to-run" class="anchor" href="#steps-to-run" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Steps to run:</h3>
+       <div>
+         <ol>
+            <li>
+<strong>Special Note: </strong><em>The file can only have 1 encryption type at a time. In other words, you cannot create an account using AES, and then create another account using DES in the same file. If you wish to use a new cipher algorithm, then you must create a new file.</em>
+</li>
+            <li>Run <code>npm install</code>  to download and install all dependencies</li>
+            <li>Run program with: <code>node app.js  -n [account name] -u [account user name] -p [account password] -m [encryption key] -c [cipher method]</code>
+</li>
+            <li>Exit the program by hitting <code>ctrl + c</code> in terminal</li>
+         </ol>
+      </div>
+        
+   <h3>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description:</h3> <p>This program will store encrypted accounts with their related username and password pairing, with
+        AES encryption. The accounts can be retrieved by using the get command with the master password that was used
+        when the account was created. If the master password does not match, the account cannot be decrypted for viewing.</p>
+     
+   <h3>
+<a id="supported-cipher-algorithms" class="anchor" href="#supported-cipher-algorithms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supported Cipher Algorithms:</h3>
+   <ul>
+      <li>AES</li>
+      <li>DES</li>
+      <li>TripleDES</li>
+      <li>Rabbit</li>
+      <li>RC4</li>
+      <li>RC4Drop</li>
+   </ul>
+   <p><em><strong>The same cipher algorithm must be used for both encryption and decryption. Data cannot be unencrypted without matching algorithm.</strong></em></p>
+   <h3>
+<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commands:</h3>
+      <ul>
+         <li>
+<h4>
+<a id="create" class="anchor" href="#create" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>create:</h4> Facilitates account creation and storage. Must include the following arguments:
+            <ul>
+               <li>--name or -n</li>
+               <li>--username or -u</li>
+               <li>--password or -p</li>
+               <li>--masterPassword or -m</li>
+               <li>--cipher or -c</li>
+            </ul>
+            <p><code>usage example: node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes</code></p>
+</li>
+            
+       <li>
+<h4>
+<a id="get" class="anchor" href="#get" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>get:</h4> Retrieves account by the account name. Must include the following arguments:
+         <ul>
+            <li>--name or -n <p><em>Account name must match how it was entered when encrypted (not case-sensitive)</em></p>
+</li>
+            <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p>
+</li>
+            <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p>
+</li>
+         </ul>
+            <p><code>usage example: node app.js get -n Facebook  -m secret123 -c aes</code></p>
+       </li>
+       
+       <li>
+<h4>
+<a id="delete" class="anchor" href="#delete" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>delete:</h4> Deletes account by the account name. Must include the following arguments:
+                <ul>
+                   <li>--name or -n <p><em>Account name must match how it was entered when encrypted (not case-sensitive)</em></p>
+</li>
+                   <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p>
+</li>
+                   <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p>
+</li>
+                </ul>
+                   <p><code>usage example: node app.js delete -n Facebook  -m secret123 -c aes</code></p>
+              </li>
+      </ul>
+       
+</div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Password manager maintained by <a href="https://github.com/Parasin">Parasin</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
