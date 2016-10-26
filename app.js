@@ -67,8 +67,7 @@ if (commands.command === 'create') {
 } else if (commands.command === 'get') {
     try {
         var retrievedAccount = getAccount(argv.name, argv.masterPassword);
-
-        if (typeof retrievedAccount === 'undefined') {
+        if (_.size(retrievedAccount) === 0) {
             console.log('Account not found with that name');
         } else {
             printResults(retrievedAccount, 'Retrieved');
@@ -80,7 +79,25 @@ if (commands.command === 'create') {
 
 
 function getAccount (accountName, masterPassword) {
-    return _.findWhere(getAccounts(masterPassword), {name: accountName});
+    var accounts = getAccounts(masterPassword);
+    var matchedAccounts = [];
+    accounts.forEach(function (account) {
+       if (account.name.toLowerCase() === accountName.toLowerCase()) {
+           matchedAccounts.push(account);
+       }
+    });
+    return matchedAccounts;
+}
+
+
+function getAccounts (masterPassword) {
+    var cipherText = storage.getItemSync('accounts');
+    var accounts = [];
+
+    if (typeof cipherText !== 'undefined') {
+        accounts = ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword);
+    }
+    return accounts;
 }
 
 
@@ -93,17 +110,6 @@ function createAccount (account, masterPassword) {
 }
 
 
-function getAccounts (masterPassword) {
-    var cipherText = storage.getItemSync('accounts');
-    var accounts = [];
-
-    if (typeof cipherText !== 'undefined') {
-       accounts = ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword);
-    }
-    return accounts;
-}
-
-
 function saveAccounts (accounts, masterPassword) {
     var cipherText = ciphers.cipher(argv.cipher, 'encrypt', accounts, masterPassword);
     storage.setItemSync('accounts', cipherText.toString());
@@ -111,9 +117,11 @@ function saveAccounts (accounts, masterPassword) {
 }
 
 
-function printResults (account, action) {
-    console.log('\n-----------------\n' + action +' account\n-----------------' +
-        '\nAccount name: ' + account.name +
-        '\nUser name   : ' + account.username +
-        '\nPassword    : ' + account.password);
+function printResults (accounts, action) {
+    console.log('\n-----------------\n' + action +' account\n-----------------');
+        accounts.forEach(function (account) {
+            console.log('Account name: ' + account.name +
+                '\nUser name   : ' + account.username +
+                '\nPassword    : ' + account.password);
+        });
 }
