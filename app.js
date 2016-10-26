@@ -94,7 +94,27 @@ function main () {
         } catch (e) {
 
         }
+    } else if (commands.command === 'update') {
+        try {
+
+        } catch (e) {
+
+        }
     }
+}
+
+
+function updateAccount (accountName, masterPassword, newAcct)  {
+    var accounts = getAccounts(masterPassword);
+    accounts.forEach(function (account) {
+        if (account.name.toLowerCase() === accountName.toLowerCase()) {
+            if (_.hasOwnProperty('name')) {
+                account.name = newAcct
+            }
+            saveAccounts(accounts, masterPassword);
+            printResults(account, 'Deleted');
+        }
+    });
 }
 
 
