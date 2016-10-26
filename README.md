@@ -71,7 +71,7 @@
                 <li>--masterPassword or -m</li>
                 <li>--cipher or -c</li>
             </ul>
-            <p>usage example: <code>node app.js create -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes</code></p>
+            <p>usage example: <code>node app.js update -n Facebook -u email@gmail.com -p pw123 -m secret123 -c aes</code></p>
         </li>
       </ul>
 </div>
