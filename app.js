@@ -39,7 +39,7 @@
             --cipher or -c
             usage example: node app.js get -n Facebook  -m secret123 -c aes
 
-        deletes : Deletes account by the account name. Must include the following arguments:
+        delete : Deletes account by the account name. Must include the following arguments:
              --name or -n
              --masterPassword or -m
              --cipher or -c
@@ -96,7 +96,13 @@ function main () {
         }
     } else if (commands.command === 'update') {
         try {
-
+            var accounts = getAccount(argv.name, argv.masterPassword);
+            if (_.size(accounts) === 0) {
+                console.log('Account not found with that name');
+            } else {
+                var account = updateAccount(argv.name, argv.masterPassword, argv.password);
+                printResults(account, 'Updated');
+            }
         } catch (e) {
 
         }
@@ -104,17 +110,17 @@ function main () {
 }
 
 
-function updateAccount (accountName, masterPassword, newAcct)  {
+function updateAccount (accountName, masterPassword, newPassword)  {
     var accounts = getAccounts(masterPassword);
+    var updatedAccount = undefined;
     accounts.forEach(function (account) {
         if (account.name.toLowerCase() === accountName.toLowerCase()) {
-            if (_.hasOwnProperty('name')) {
-                account.name = newAcct
-            }
+            account.password = newPassword;
             saveAccounts(accounts, masterPassword);
-            printResults(account, 'Deleted');
+            updatedAccount = account;
         }
     });
+    return updatedAccount;
 }
 
 
@@ -135,7 +141,7 @@ function getAccount (accountName, masterPassword) {
     var matchedAccounts = [];
     accounts.forEach(function (account) {
        if (account.name.toLowerCase() === accountName.toLowerCase()) {
-           matchedAccounts.push(account);
+           matchedAccounts = account;
        }
     });
     return matchedAccounts;
