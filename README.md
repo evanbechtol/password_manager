@@ -52,7 +52,7 @@
             
        <li><h4>get:</h4> Retrieves account by the account name. Must include the following arguments:
          <ul>
-            <li>--name or -n <p><em>Account name must exactly match how it was entered when encrypted (case-sensitive)</em></p></li>
+            <li>--name or -n <p><em>Account name must match how it was entered when encrypted (not case-sensitive)</em></p></li>
             <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p></li>
             <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p></li>
          </ul>
@@ -61,7 +61,7 @@
        
        <li><h4>delete:</h4> Deletes account by the account name. Must include the following arguments:
                 <ul>
-                   <li>--name or -n <p><em>Account name must exactly match how it was entered when encrypted (case-sensitive)</em></p></li>
+                   <li>--name or -n <p><em>Account name must match how it was entered when encrypted (not case-sensitive)</em></p></li>
                    <li>--masterPassword or -m <p><em>A password that does not match the one that was used for the account on encryption will result in failure to decrypt that account</em></p></li>
                    <li>--cipher or -c <p><em>Cipher algorithm must match the one that was used to encrypt account</em></p></li>
                 </ul>
