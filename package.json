@@ -1,6 +1,6 @@
 {
   "name": "password_manager",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Password management program utilizing modern encryption approaches",
   "main": "app.js",
   "scripts": {
