@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PW Mgr.</title>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--<link rel="stylesheet" href="/css/main.css">-->
+    </head>
+    <body ng-app="pwmgr" class="background">
+        <nav ng-controller="navController as navVM" class="navbar navbar-default navbar-fixed-top">
+            <div id="navContainer">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">Password Manager</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li class="navfont" ng-class="{navactive: isactive('/')}"><a href="#/">Home</a></li>
+                            <li class="navfont" ng-class="{navactive: isactive('/dashboard')}"><a href="#/dashboard">Dashboard</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="navfont" ng-if="$root.session" ng-click="logout()"><a href="#/">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="clear" style="height: 4em; background-color: transparent"></div>
+
+        <div ng-view></div>
+
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-resource.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-aria.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-messages.min.js"></script>
+        <script src="lib/underscore.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/routes/routes.js"></script>
+        <script src="js/factories/authfactory.js"></script>
+        <script src="js/controllers/nav_controllers.js"></script>
+        <script src="js/controllers/auth_controllers.js"></script>
+    </body>
+</html>
