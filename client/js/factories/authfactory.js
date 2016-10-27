@@ -5,13 +5,16 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
     var factory = {};
     var userData = {};
 
+
     factory.isLoggedIn = function () {
         return !!user;
     };
 
+
     factory.getUserStatus = function () {
         return user;
     };
+
 
     factory.login = function (email, password) {
         var deferred = $q.defer();
@@ -26,7 +29,6 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
                     if ($cookies.get('session_id')) {
                         $cookies.remove('session_id');
                     }
-                    console.log('Adding session cookie:' + JSON.stringify(data.data));
                     $cookies.put('session_id', data.data.session_id);
                     $rootScope.session = data.data.session_id;
                     userData = data.data;
@@ -42,6 +44,7 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
             });
         return deferred.promise;
     };
+
 
     factory.logout = function (session_id) {
         var deferred = $q.defer();
@@ -60,5 +63,27 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
             });
         return deferred.promise;
     };
+
+    /* TODO: Finish registration functionality and test! */
+    factory.register = function (email, password) {
+        var deferred = $q.defer();
+        var data = {
+            email: email
+            , password: password
+        };
+        $http.post('/users', data)
+            .then(function (data) {
+                if (data.status === 200) {
+                    deferred.resolve(data.data);
+                } else {
+                    deferred.reject(data);
+                }
+            }, function (err) {
+                user = false;
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    };
+
     return factory;
 }]);

@@ -1,33 +1,44 @@
-<div ng-controller="loginCtrl as vm">
-    <div ng-cloak style="" layout-gt-xs="row" layout-align="center center" layout-fill layout-margin>
-        <p flex="66" class="alert alert-danger" ng-if="error">{{ errfireor }}</p>
+<div ng-controller="loginCtrl as vm" class="container-fluid">
+    <div ng-cloak layout-gt-xs="row" layout-align="center center" layout-fill layout-margin layout-padding>
+        <p flex="66" class="alert alert-danger" ng-if="error">{{ error }}</p>
         <p flex="66" class="alert alert-success" ng-if="message">{{ message }}</p>
         <div class="clear"></div>
     </div>
-    <div name="loginForm" layout="row" layout-sm="column" layout-align="space-around center" layout-padding="2em" layout-margin>
-        <md-content class="loginForm" md-theme="default" layout-gt-xs="row">
-            <div flex>
-                <md-input-container>
-                    <label>Username</label>
-                    <input name="email" md-minlength="4" required="" ng-model="user.email">
-                    <div ng-cloak ng-messages="loginForm.email.$error" role="alert" multiple="">
-                        <div ng-message="required" class="message">Username is required</div>
-                    </div>
-                </md-input-container>
-            </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1" style="text-align: center" name="loginForm">
+            <md-content class="loginForm" md-theme="default">
+                <div>
+                    <md-input-container class="col-xs-12 col-md-6">
+                        <label>Email</label>
+                        <input name="email" md-minlength="4" required="" ng-model="user.email">
+                        <div ng-cloak ng-messages="loginForm.email.$error" role="alert" multiple="">
+                            <div ng-message="required" class="message">Email is required</div>
+                        </div>
+                    </md-input-container>
+                </div>
 
-            <div flex>
-                <md-input-container>
-                    <label>Password</label>
-                    <input required="" ng-model="user.password" type="password">
-                </md-input-container>
-            </div>
+                <div>
+                    <md-input-container class="col-xs-12 col-md-6">
+                        <label>Password</label>
+                        <input required="" ng-model="user.password" type="password">
+                    </md-input-container>
+                </div>
 
-            <div flex>
-                <md-input-container>
+                <md-input-container class="col-xs-12 col-md-4">
                     <md-button class="md-raised md-primary" type="submit" ng-click="login()" ng-disabled="user.email.length == null || user.password.length == null">Login</md-button>
                 </md-input-container>
-            </div>
-        </md-content>
+
+                <md-input-container class="col-xs-12 col-md-4">
+                    <md-button class="md-raised md-primary" type="submit" ng-click="register()" ng-disabled="user.email.length == null || user.password.length == null">Register</md-button>
+                </md-input-container>
+
+                <md-input-container class="col-xs-12 col-md-4">
+                    <md-button class="md-raised md-primary" type="submit" ng-click="resetPW()">Forgot Password</md-button>
+                </md-input-container>
+
+
+            </md-content>
+        </div>
     </div>
+
 </div>

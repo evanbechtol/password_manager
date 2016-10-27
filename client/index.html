@@ -7,6 +7,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/dashboard.css">
     </head>
     <body ng-app="pwmgr" class="background">
@@ -23,8 +24,8 @@
                 <div class="collapse navbar-collapse">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
-                            <li class="navfont" ng-class="{navactive: isactive('/')}"><a href="#/">Home</a></li>
-                            <li class="navfont" ng-class="{navactive: isactive('/dashboard')}"><a href="#/dashboard">Dashboard</a></li>
+                            <li class="navfont" ng-class="{navactive: isActive('/')}"><a href="#/">Home</a></li>
+                            <li class="navfont" ng-class="{navactive: isActive('/dashboard')}"><a href="#/dashboard">Dashboard</a></li>
                         </ul>
                         <ul class="nav navbar-nav pull-right">
                             <li class="navfont" ng-if="$root.session" ng-click="logout()"><a href="#/">Logout</a></li>
@@ -52,6 +53,7 @@
         <script src="js/routes/routes.js"></script>
         <script src="js/factories/authfactory.js"></script>
         <script src="js/controllers/nav_controllers.js"></script>
+        <script src="js/controllers/dash_controllers.js"></script>
         <script src="js/controllers/auth_controllers.js"></script>
     </body>
 </html>

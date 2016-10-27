@@ -11,12 +11,23 @@
     background: -webkit-linear-gradient(top,  #1e5799 3%,#0e7cd6 79%,#2989d8 100%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  #1e5799 3%,#0e7cd6 79%,#2989d8 100%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+    margin-bottom: 0;
+    text-align: center;
 }
 
 @media (max-width: 850px) {
     #dash-jumbo {
         padding-top: 5em;
-        text-align: center;
         height: 20em;
     }
+}
+
+#dash-body {
+    background-color: #2989D8;
+    min-height: 500px;
+}
+
+#dash-content {
+    background-color: dimgray;
+    min-height: 500px
 }

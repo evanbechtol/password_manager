@@ -1,5 +1,5 @@
 var app = angular.module('pwmgr', ['ngRoute', 'ngResource', 'ngMaterial', 'ngAnimate', 'ngCookies', 'ngMessages']);
-
+/* TODO: Need to include crypto libraries for secure transmission to server */
 app.factory('_', ['$window', function ($window) {
     return $window._;
 }]);
@@ -19,6 +19,6 @@ app.run(function ($rootScope, $location, $route, $cookies) {
 
 app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('red')
+        .primaryPalette('blue')
         .accentPalette('blue-grey');
 });

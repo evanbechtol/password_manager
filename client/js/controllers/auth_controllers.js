@@ -11,8 +11,12 @@ app.controller('loginCtrl', ['$resource', '$log', '$location', '$rootScope', '$s
                 $scope.message = 'Logged in, redirecting!';
                 $timeout(function () { $location.path('/dashboard') }, 1000);
             }, function (err) {
-                $scope.error = err.error;
+                $scope.error = 'Account not found, please check that your email and password are correct.';
                 $rootScope.session = null;
             });
+    };
+
+    $scope.register = function () {
+
     };
 }]);
