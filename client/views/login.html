@@ -9,8 +9,8 @@
             <div flex>
                 <md-input-container>
                     <label>Username</label>
-                    <input name="username" md-minlength="4" required="" ng-model="user.username">
-                    <div ng-cloak ng-messages="loginForm.username.$error" role="alert" multiple="">
+                    <input name="email" md-minlength="4" required="" ng-model="user.email">
+                    <div ng-cloak ng-messages="loginForm.email.$error" role="alert" multiple="">
                         <div ng-message="required" class="message">Username is required</div>
                     </div>
                 </md-input-container>
@@ -25,7 +25,7 @@
 
             <div flex>
                 <md-input-container>
-                    <md-button class="md-raised md-primary" type="submit" ng-click="login()" ng-disabled="user.username.length == null || user.password.length == null">Login</md-button>
+                    <md-button class="md-raised md-primary" type="submit" ng-click="login()" ng-disabled="user.email.length == null || user.password.length == null">Login</md-button>
                 </md-input-container>
             </div>
         </md-content>

@@ -4,7 +4,7 @@ app.controller('loginCtrl', ['$resource', '$log', '$location', '$rootScope', '$s
     $scope.error = undefined;
     $scope.message = undefined;
     $scope.login = function() {
-        authFactory.login($scope.user.username, $scope.user.password)
+        authFactory.login($scope.user.email, $scope.user.password)
             .then(function (res) {
                 $rootScope.session = res.session_id;
                 $scope.error = null;

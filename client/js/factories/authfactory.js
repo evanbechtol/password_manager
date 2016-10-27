@@ -13,13 +13,13 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
         return user;
     };
 
-    factory.login = function (username, password) {
+    factory.login = function (email, password) {
         var deferred = $q.defer();
         var data = {
-            username: username
+            email: email
             , password: password
         };
-        $http.post('/login', data)
+        $http.post('/users/login', data)
             .then(function (data) {
                 if (data.status === 200) {
                     user = true;
