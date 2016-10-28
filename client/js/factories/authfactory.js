@@ -29,8 +29,10 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
                     if ($cookies.get('session_id')) {
                         $cookies.remove('session_id');
                     }
-                    $cookies.put('session_id', data.data.session_id);
-                    $rootScope.session = data.data.session_id;
+                    var headers = data.headers();
+
+                    $cookies.put('session_id', headers.auth);
+                    $rootScope.session = headers.auth;
                     userData = data.data;
                     deferred.resolve(data.data);
                 } else {
@@ -64,12 +66,11 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
         return deferred.promise;
     };
 
-    /* TODO: Finish registration functionality and test! */
     factory.register = function (email, password) {
         var deferred = $q.defer();
         var data = {
-            email: email
-            , password: password
+            email: CryptoJS.AES.encrypt(email, '!@_pr3Ssur3C0ok_ER!').toString()
+            , password: CryptoJS.AES.encrypt(password, '!@_pr3Ssur3C0ok_ER!').toString()
         };
         $http.post('/users', data)
             .then(function (data) {

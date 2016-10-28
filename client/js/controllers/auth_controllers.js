@@ -18,6 +18,16 @@ app.controller('loginCtrl', ['$resource', '$log', '$location', '$rootScope', '$s
     };
 
     $scope.register = function () {
-
+        authFactory.register($scope.user.email, $scope.user.password)
+            .then(function (res, status) {
+                $scope.error = null;
+                $scope.message = 'Account created successfully, you can now login!';
+                $timeout(function () { $location.path('/dashboard') }, 1000);
+            }, function (err) {
+                console.log(err.data.name);
+                if (err.data.name === 'SequelizeUniqueConstraintError') {
+                    $scope.error = 'Account already exists with that email.'
+                }
+            });
     };
 }]);

@@ -28,7 +28,7 @@
                             <li class="navfont" ng-class="{navactive: isActive('/dashboard')}"><a href="#/dashboard">Dashboard</a></li>
                         </ul>
                         <ul class="nav navbar-nav pull-right">
-                            <li class="navfont" ng-if="$root.session" ng-click="logout()"><a href="#/">Logout</a></li>
+                            <li class="navfont" ng-show="$root.session" ng-click="logout()"><a href="#/">Logout</a></li>
                         </ul>
                     </div>
                 </div>

@@ -5,7 +5,8 @@ app.controller('navController', ['$scope', '$location', 'authFactory', '$rootSco
     };
 
     $scope.logout = function () {
-        authFactory.logout({session_id: $rootScope.session})
+        $rootScope.session = undefined;
+        /*authFactory.logout({session_id: $rootScope.session})
             .then(function (data) {
                 if (data.result) {
                     $rootScope.session =  null;
@@ -13,6 +14,6 @@ app.controller('navController', ['$scope', '$location', 'authFactory', '$rootSco
                 }
             }, function (err) {
                 console.log('Error logging out: ' + JSON.stringify(err));
-            });
+            });*/
     };
 }]);
