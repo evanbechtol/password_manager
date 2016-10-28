@@ -5,6 +5,38 @@
     </div>
     <!-- TODO: Create layout for Create/Get/Update/Delete accounts -->
     <div class="container-fluid" id="dash-body">
-        <div class="col-xs-12 col-md-10 col-md-offset-1" id="dash-content"></div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1" id="dash-content">
+            <h3>Description</h3>
+            <p>To begin, select the operation that you wish to perform.</p>
+
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
+                <form ng-submit="submit()" ng-controller="dashCtrl as dm" ng-cloak="">
+                    <p ng-model="user">{{ user }}</p>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Action</label>
+                        <md-select ng-model="user.action">
+                            <md-option ng-repeat="action in actions" value="{{ action }}">
+                                {{ action }} account
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="float: right">
+                        <md-input-container>
+                            <label>Account Name</label>
+                            <input ng-model="user.account.name">
+                        </md-input-container>
+                        <md-input-container ng-if="user.action === 'Create'">
+                            <label>Username</label>
+                            <input ng-model="user.account.username">
+                        </md-input-container>
+                        <md-input-container ng-if="user.action === 'Create' || user.action === 'Update'">
+                            <label>Password</label>
+                            <input ng-model="user.account.password">
+                        </md-input-container>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>

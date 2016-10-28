@@ -3,6 +3,7 @@ app.controller('loginCtrl', ['$resource', '$log', '$location', '$rootScope', '$s
     $scope.user = {};
     $scope.error = undefined;
     $scope.message = undefined;
+
     $scope.login = function() {
         authFactory.login($scope.user.email, $scope.user.password)
             .then(function (res) {

@@ -21,7 +21,11 @@ var ciphers = {
         },
         decrypt: function (cipherText, masterPassword) {
             var bytes = crypto.AES.decrypt(cipherText, masterPassword);
-            return JSON.parse(bytes.toString(crypto.enc.Utf8));
+            var plainText = bytes.toString(crypto.enc.Utf8);
+            if (typeof plainText === 'object') {
+                return JSON.parse(plainText);
+            }
+            return plainText;
         }
     },
     des: {
@@ -77,7 +81,7 @@ var ciphers = {
                 if (action === 'encrypt') {
                     return this.aes.encrypt(data, masterPassword);
                 } else if (action === 'decrypt') {
-                    return this.aes.decrypt(data, masterPassword);
+                    return ciphers.aes.decrypt(data, masterPassword);
                 }
                 break;
 

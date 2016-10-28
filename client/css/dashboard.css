@@ -28,6 +28,8 @@
 }
 
 #dash-content {
-    background-color: dimgray;
-    min-height: 500px
+    background-color: #adadad;
+    min-height: 500px;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
 }

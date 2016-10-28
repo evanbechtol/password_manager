@@ -11,6 +11,7 @@ var _ = require('underscore');
 var extend = require('extend');
 var middleware = require(__dirname + '/server/middleware.js')(db);
 var app = express();
+var ciphers = require(__dirname + '/util/ciphers.js');
 
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(bodyParser.json());
@@ -23,7 +24,9 @@ app.get('/', function (req, res) {
 /* POST users */
 app.post('/users', function (req, res) {
     var body = _.pick(req.body, 'email', 'password');
-    console.log(body);
+    body.email = ciphers.cipher('aes', 'decrypt', body.email, '!@_pr3Ssur3C0ok_ER!');
+    body.password = ciphers.cipher('aes', 'decrypt', body.password, '!@_pr3Ssur3C0ok_ER!');
+
     db.user.create(body).then(function (user) {
         res.json(user.toPublicJSON());
     }).catch(function (err) {
@@ -34,6 +37,9 @@ app.post('/users', function (req, res) {
 /* POST login users */
 app.post('/users/login', function (req, res) {
     var body = _.pick(req.body, 'email', 'password');
+    body.email = ciphers.cipher('aes', 'decrypt', body.email, '!@_pr3Ssur3C0ok_ER!');
+    body.password = ciphers.cipher('aes', 'decrypt', body.password, '!@_pr3Ssur3C0ok_ER!');
+
     db.user.authenticate(body).then(function(user) {
         var token = user.generateToken('authentication');
         console.log(token);

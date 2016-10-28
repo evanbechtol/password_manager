@@ -19,8 +19,8 @@ app.factory('authFactory', ['$q', '$timeout', '$http', '$cookies', '$rootScope',
     factory.login = function (email, password) {
         var deferred = $q.defer();
         var data = {
-            email: email
-            , password: password
+            email: CryptoJS.AES.encrypt(email, '!@_pr3Ssur3C0ok_ER!').toString()
+            , password: CryptoJS.AES.encrypt(password, '!@_pr3Ssur3C0ok_ER!').toString()
         };
         $http.post('/users/login', data)
             .then(function (data) {
