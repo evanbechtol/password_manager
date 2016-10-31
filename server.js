@@ -55,9 +55,38 @@ app.post('/users/login', function (req, res) {
     });
 });
 
+/* POST create account */
+app.post('/account/create', function (req, res) {
+    var body = _.pick(req.body, 'name', 'username', 'password');
+
+    db.account.create(body).then(function () {
+        res.send();
+    }).catch(function (err) {
+        res.status(400).json(err);
+    });
+
+});
+
+/* POST create account
+* TODO: finish this route to allow account retrieval.
+* 1) Encrypted account data received from client
+* 2) Must verify that the user is the one attempting to view
+* 3) Must verify master p/w is correct
+* 4) Can send encrypted account data back to client */
+app.post('/account/get', function (req, res) {
+    var body = _.pick(req.body, 'name', 'username', 'password');
+
+    db.account.get(body).then(function () {
+        res.send();
+    }).catch(function (err) {
+        res.status(400).json(err);
+    });
+
+});
+
 app.listen(PORT, function () {
     console.log('Express listening on port: ' + PORT);
-    db.sequelize.sync().then(function () {
+    db.sequelize.sync({force: true}).then(function () {
         console.log('Database synced');
     });
 });

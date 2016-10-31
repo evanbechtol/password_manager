@@ -9,9 +9,16 @@
             <h3>Description</h3>
             <p>To begin, select the operation that you wish to perform.</p>
 
+
             <div class="col-xs-12 col-md-8 col-md-offset-2">
+
                 <form ng-submit="submit()" ng-controller="dashCtrl as dm" ng-cloak="">
-                    <p ng-model="user">{{ user }}</p>
+                    <!--<p ng-model="user">{{ user }}</p>-->
+                    <div class="row">
+                        <p class="col-xs-12 alert alert-error" ng-if="error">{{ error }}</p>
+                        <p class="col-xs-12 alert alert-success" ng-if="message">{{ message }}</p>
+                    </div>
+
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Action</label>
                         <md-select ng-model="user.action">
@@ -19,22 +26,36 @@
                                 {{ action }} account
                             </md-option>
                         </md-select>
+
                     </md-input-container>
+
                     <div class="float: right">
                         <md-input-container>
                             <label>Account Name</label>
                             <input ng-model="user.account.name">
                         </md-input-container>
+
                         <md-input-container ng-if="user.action === 'Create'">
                             <label>Username</label>
                             <input ng-model="user.account.username">
                         </md-input-container>
+
                         <md-input-container ng-if="user.action === 'Create' || user.action === 'Update'">
                             <label>Password</label>
                             <input ng-model="user.account.password">
                         </md-input-container>
+
+                        <md-input-container ng-if="user.action && user.account.name">
+                            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+                        </md-input-container>
                     </div>
+
                 </form>
+
+            </div>
+
+            <div class="col-xs-12">
+
             </div>
         </div>
 

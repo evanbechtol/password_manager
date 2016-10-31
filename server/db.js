@@ -25,6 +25,8 @@ var db = {};
 
 /* Models */
 db.user = sequelize.import(__dirname + '/models/user.js');
+db.account = sequelize.import(__dirname + '/models/account.js');
+db.user.hasMany(db.account);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

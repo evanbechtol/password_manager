@@ -1,3 +1,7 @@
 .navactive {
     font-weight: bold;
 }
+
+.loginBtn {
+    width: 200px;
+}
