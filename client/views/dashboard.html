@@ -12,7 +12,7 @@
 
             <div class="col-xs-12 col-md-8 col-md-offset-2">
 
-                <form ng-submit="submit()" ng-controller="dashCtrl as dm" ng-cloak="">
+                <form name="accountForm" ng-submit="submit()" ng-controller="dashCtrl as dm" ng-cloak="">
                     <!--<p ng-model="user">{{ user }}</p>-->
                     <div class="row">
                         <p class="col-xs-12 alert alert-error" ng-if="error">{{ error }}</p>
@@ -29,24 +29,41 @@
 
                     </md-input-container>
 
-                    <div class="float: right">
+                    <div class="float: right" ng-if="user.action">
                         <md-input-container>
                             <label>Account Name</label>
-                            <input ng-model="user.account.name">
+                            <input name="name" ng-model="user.account.name" required>
+                            <div ng-messages="accountForm.name.$error">
+                                <div ng-message="required">Account name is required</div>
+                            </div>
                         </md-input-container>
 
                         <md-input-container ng-if="user.action === 'Create'">
                             <label>Username</label>
-                            <input ng-model="user.account.username">
+                            <input name="username" ng-model="user.account.username" required>
+                            <div ng-messages="accountForm.username.$error">
+                                <div ng-message="required">Account username is required</div>
+                            </div>
                         </md-input-container>
 
                         <md-input-container ng-if="user.action === 'Create' || user.action === 'Update'">
-                            <label>Password</label>
-                            <input ng-model="user.account.password">
+                            <label>Account Password</label>
+                            <input name="password" ng-model="user.account.password" required>
+                            <div ng-messages="accountForm.password.$error">
+                                <div ng-message="required">Account password is required</div>
+                            </div>
                         </md-input-container>
 
-                        <md-input-container ng-if="user.action && user.account.name">
-                            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+                        <md-input-container ng-if="user.action">
+                            <label>Master Password</label>
+                            <input name="masterPassword" ng-model="user.account.masterPassword" required>
+                            <div ng-messages="accountForm.masterPassword.$error">
+                                <div ng-message="required">Master password is required</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container ng-if="user.action">
+                            <md-button class="md-raised md-primary" type="submit" ng-disabled="!accountForm.$valid">Submit</md-button>
                         </md-input-container>
                     </div>
 
