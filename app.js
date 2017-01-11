@@ -65,6 +65,7 @@ function main () {
 function updateAccount (accountName, masterPassword, newPassword)  {
     var accounts = getAccounts(masterPassword);
     var updatedAccount = undefined;
+
     accounts.forEach(function (account) {
         if (account.name.toLowerCase() === accountName.toLowerCase()) {
             account.password = newPassword;
@@ -89,13 +90,16 @@ function deleteAccount (accountName, masterPassword) {
 
 
 function getAccount (accountName, masterPassword) {
-    var accounts = getAccounts(masterPassword);
-    var matchedAccounts = [];
-    accounts.forEach(function (account) {
-       if (account.name.toLowerCase() === accountName.toLowerCase()) {
-           matchedAccounts = account;
-       }
-    });
+    var accounts = getAccounts(masterPassword),
+        matchedAccounts = [];
+
+    if (accounts) {
+        for (var i = 0; i < accounts.length; i++) {
+            if (accounts[i].name.toLowerCase() === accountName.toLowerCase()) {
+                matchedAccounts = accounts[i];
+            }
+        }
+    }
     return matchedAccounts;
 }
 
@@ -107,7 +111,7 @@ function getAccounts (masterPassword) {
     if (typeof cipherText !== 'undefined') {
         accounts = ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword);
     }
-    return accounts;
+    return JSON.parse(accounts);
 }
 
 
