@@ -109,7 +109,7 @@ function getAccounts (masterPassword) {
     var accounts = [];
 
     if (typeof cipherText !== 'undefined') {
-        accounts = ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword);
+        accounts = JSON.parse(ciphers.cipher(argv.cipher, 'decrypt', cipherText, masterPassword));
     }
     return JSON.parse(accounts);
 }
